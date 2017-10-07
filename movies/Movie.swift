@@ -18,7 +18,6 @@ struct Movie {
     var rating:String = ""
     var img = UIImage()
     
-    
     init(title: String, director: String, plot: String, date: String, rating: String, img: String?) {
         self.title = title
         self.director = director
