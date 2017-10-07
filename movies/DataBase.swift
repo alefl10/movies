@@ -19,19 +19,41 @@ class DataBase {
     let goodWillHunting:Movie = Movie(title: "Good Will Hunting", director:"Gus Van Sant", plot:"Will Hunting, a janitor at M.I.T., has a gift for mathematics, but needs help from a psychologist to find direction in his life.", date:"Jan. 9, 1998", rating: "8.3", img: "GoodWillHunting")
     
     init() {
-        db = [theLionKing, theSocialNetwork, goodWillHunting]
+        let path = Bundle.main.path(forResource: "movieData", ofType: "json")
+        print(path ?? "Path was not found!")
+        let url = URL(fileURLWithPath: path!)
+        do {
+            let data = try Data(contentsOf: url)
+            let jsonData = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+            print(jsonData)
+            let dbArr: [Any] = jsonData as! [Any]
+            for movie in dbArr {
+                let movieDict = movie as! [String:Any]
+                let newMovie = createMovie(movieInfo: movieDict)
+                db.append(newMovie)
+            }
+        } catch {
+            print(error)
+        }
     }
     
     func addMovie(movie: Movie) {
+        //Inser Movie in .json as well
         db.insert(movie, at: 0)
     }
     
     func removeMovie(index: Int){
+        //Remove Movie from .json as well
         db.remove(at: index)
     }
     
     func getMovies() -> [Movie] {
         return db
+    }
+    
+    private func createMovie(movieInfo:[String:Any]) -> Movie {
+        let movie = Movie(title: movieInfo["title"] as! String, director: movieInfo["director"] as! String, plot: movieInfo["plot"] as! String, date: movieInfo["date"] as! String, rating: movieInfo["rating"] as! String, img: movieInfo["img"] as? String)
+        return movie
     }
     
     
