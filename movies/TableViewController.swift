@@ -80,7 +80,7 @@ class TableViewController: UITableViewController, createMovieDelegate {
         }
         let movie = movieDB.getMovies()[indexPath.row]
         cell.movieTitle.text = movie.title
-        cell.movieRating.text = movie.rating
+        cell.movieRating.text = String(movie.rating)
         return cell
     }
     

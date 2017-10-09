@@ -15,10 +15,10 @@ struct Movie {
     var director:String = ""
     var plot:String = ""
     var date:String = ""
-    var rating:String = ""
+    var rating:Float = 0
     var img = UIImage()
     
-    init(title: String, director: String, plot: String, date: String, rating: String, img: String?) {
+    init(title: String, director: String, plot: String, date: String, rating: Float, img: String?) {
         self.title = title
         self.director = director
         self.plot = plot
