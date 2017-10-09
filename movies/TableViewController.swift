@@ -75,9 +75,6 @@ class TableViewController: UITableViewController, createMovieDelegate {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CellViewController
-        for movie in movieDB.getMovies() {
-            print(movie.title)
-        }
         let movie = movieDB.getMovies()[indexPath.row]
         cell.movieTitle.text = movie.title
         cell.movieRating.text = String(movie.rating)

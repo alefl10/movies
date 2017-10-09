@@ -59,7 +59,7 @@ class DataBase {
             movieDict["plot"] = movie.plot
             movieDict["date"] = movie.date
             movieDict["rating"] = NSNumber(value: movie.rating)
-            //            movieDict["img"] = movie.img
+            movieDict["img"] = movie.title.replacingOccurrences(of: " ", with: "")
             movies.append(movieDict)
         }
         do {
