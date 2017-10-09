@@ -32,13 +32,13 @@ class DataBase {
     }
     
     func addMovie(movie: Movie) {
-        //Inser Movie in .json as well
         db.insert(movie, at: 0)
+        writeToJsonFile()
     }
     
     func removeMovie(index: Int){
-        //Remove Movie from .json as well
         db.remove(at: index)
+        writeToJsonFile()
     }
     
     func getMovies() -> [Movie] {
@@ -50,7 +50,29 @@ class DataBase {
         return movie
     }
     
-    
+    private func writeToJsonFile() {
+        var movies = [Any]()
+        for movie in db {
+            var movieDict = [String:Any]()
+            movieDict["title"] = movie.title
+            movieDict["director"] = movie.director
+            movieDict["plot"] = movie.plot
+            movieDict["date"] = movie.date
+            movieDict["rating"] = NSNumber(value: movie.rating)
+            //            movieDict["img"] = movie.img
+            movies.append(movieDict)
+        }
+        do {
+            let jsonMovie = try JSONSerialization.data(withJSONObject: movies, options: .prettyPrinted)
+            let fileManager = FileManager.default
+            let url = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            let jsonURL = url.appendingPathComponent("userMovies.json")
+            print(jsonURL)
+            try jsonMovie.write(to: jsonURL)
+        } catch {
+            print(error)
+        }
+    }
     
 
 }

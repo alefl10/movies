@@ -24,7 +24,7 @@ struct Movie {
         self.plot = plot
         self.date = date
         self.rating = rating
-        if (img == "") {
+        if (img == "noPic") {
             self.img = UIImage(named: "movie.png")!
         } else {
            self.img = UIImage(named: img! + ".jpg")!
