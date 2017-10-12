@@ -12,12 +12,12 @@ class DataBase {
     
     var db = [Movie]()
     
+    
     init() {
-        let path = Bundle.main.path(forResource: "movieData", ofType: "json")
-        print(path ?? "Path was not found!")
-        let url = URL(fileURLWithPath: path!)
+        let url = findDirFile()
+        let filerUrl = url.appendingPathComponent("userMovies.json")
         do {
-            let data = try Data(contentsOf: url)
+            let data = try Data(contentsOf: filerUrl)
             let jsonData = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
             print(jsonData)
             let dbArr: [Any] = jsonData as! [Any]
@@ -28,6 +28,8 @@ class DataBase {
             }
         } catch {
             print(error)
+            print("File does not exist or could not be serilized as JSON")
+            accessBundleMovie()
         }
     }
     
@@ -46,7 +48,7 @@ class DataBase {
     }
     
     private func createMovie(movieInfo:[String:Any]) -> Movie {
-        let movie = Movie(title: movieInfo["title"] as! String, director: movieInfo["director"] as! String, plot: movieInfo["plot"] as! String, date: movieInfo["date"] as! String, rating: movieInfo["rating"] as! Float, img: movieInfo["img"] as? String)
+        let movie = Movie(title: movieInfo["title"] as! String, director: movieInfo["director"] as! String, plot: movieInfo["plot"] as! String, date: movieInfo["date"] as! String, rating: movieInfo["rating"] as! Float, img: movieInfo["img"] as! String)
         return movie
     }
     
@@ -64,8 +66,7 @@ class DataBase {
         }
         do {
             let jsonMovie = try JSONSerialization.data(withJSONObject: movies, options: .prettyPrinted)
-            let fileManager = FileManager.default
-            let url = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            let url = findDirFile()
             let jsonURL = url.appendingPathComponent("userMovies.json")
             print(jsonURL)
             try jsonMovie.write(to: jsonURL)
@@ -74,6 +75,32 @@ class DataBase {
         }
     }
     
+    private func findDirFile() -> URL {
+        let fileManager = FileManager.default
+        let url = try! fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        print(url)
+        return url
+        
+    }
+    
+    private func accessBundleMovie() {
+        let path = Bundle.main.path(forResource: "movieData", ofType: "json")
+        print(path ?? "Path was not found!")
+        let url = URL(fileURLWithPath: path!)
+        do {
+            let data = try Data(contentsOf: url)
+            let jsonData = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+            print(jsonData)
+            let dbArr: [Any] = jsonData as! [Any]
+            for movie in dbArr {
+                let movieDict = movie as! [String:Any]
+                let newMovie = createMovie(movieInfo: movieDict)
+                db.append(newMovie)
+            }
+        } catch {
+            print(error)
+        }
+    }
 
 }
 
