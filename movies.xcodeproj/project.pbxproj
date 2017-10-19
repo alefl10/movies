@@ -74,9 +74,9 @@
 				A9B59C401F7A274C00BD816E /* Movie.swift */,
 				A9B59C421F7A276300BD816E /* DataBase.swift */,
 				A9B59C2C1F7A26B400BD816E /* Main.storyboard */,
-				A9B59C2F1F7A26B400BD816E /* Assets.xcassets */,
 				A9B59C311F7A26B400BD816E /* LaunchScreen.storyboard */,
 				A9EB63691F897002005254C5 /* movieData.json */,
+				A9B59C2F1F7A26B400BD816E /* Assets.xcassets */,
 				A9B59C341F7A26B400BD816E /* Info.plist */,
 			);
 			path = movies;
