@@ -8,28 +8,49 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class TableViewController: UITableViewController, createMovieDelegate {
 
     var detailsViewController: DetailsViewController? = nil
-    let movieDB = DataBase()
+    var movies = [Movie]()
+//    let movieDB = DataBase()
     
     override func viewDidLoad() {
+        movies = fetchMovies()
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         navigationItem.leftBarButtonItem = editButtonItem
+    }
+    
+    func fetchMovies() -> [Movie] {
+        var fectchedMovies = [Movie]()
+        let fetchRequest:NSFetchRequest<Movie> = Movie.fetchRequest()
+        do {
+            let fetchedResults = try CoreDataController.getContext().fetch(fetchRequest)
+            if fetchedResults.count != 0 {
+                
+            }
+            for movie in fetchedResults {
+                fectchedMovies.insert(movie, at: 0)
+            }
+            return fectchedMovies
+        } catch  {
+            print("There was an error within \"viewDidAppear\": \(error)")
+            return fectchedMovies
+        }
     }
     
     
     // MARK: - createMovie Protocol
     
     func createMovie(movie: Movie, vc: UIViewController) {
-        movieDB.addMovie(movie: movie)
+        movies = fetchMovies()
         let indexPath = IndexPath(row: 0, section: 0)
         tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         self.navigationController?.popViewController(animated: true)
         vc.dismiss(animated: true, completion: nil)
-
+//        tableView.reloadData()
     }
     
     
@@ -44,11 +65,11 @@ class TableViewController: UITableViewController, createMovieDelegate {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let nextVC = segue.destination as! DetailsViewController
-                nextVC.titleString = movieDB.getMovies()[indexPath.row].title
-                nextVC.pictureName = movieDB.getMovies()[indexPath.row].img
-                nextVC.directorString = movieDB.getMovies()[indexPath.row].director
-                nextVC.plotString = movieDB.getMovies()[indexPath.row].plot
-                nextVC.dateString = movieDB.getMovies()[indexPath.row].date
+                nextVC.titleString = movies[indexPath.row].title!
+                nextVC.pictureName = UIImage(named: movies[indexPath.row].img! + ".jpg")!
+                nextVC.directorString = movies[indexPath.row].director!
+                nextVC.plotString = movies[indexPath.row].plot!
+                nextVC.dateString = movies[indexPath.row].date!
             }
         } else if segue.identifier == "addMovie" {
             print("addMovie")
@@ -70,12 +91,12 @@ class TableViewController: UITableViewController, createMovieDelegate {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movieDB.getMovies().count
+        return movies.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CellViewController
-        let movie = movieDB.getMovies()[indexPath.row]
+        let movie = movies[indexPath.row]
         cell.movieTitle.text = movie.title
         cell.movieRating.text = String(movie.rating)
         return cell
@@ -88,7 +109,9 @@ class TableViewController: UITableViewController, createMovieDelegate {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            movieDB.removeMovie(index: indexPath.row)
+            CoreDataController.getContext().delete(movies[indexPath.row])
+            movies.remove(at: indexPath.row)
+            CoreDataController.saveContext()
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
