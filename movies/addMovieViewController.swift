@@ -5,13 +5,12 @@
 //  Created by Alejandro Ferrero on 9/28/17.
 //  Copyright © 2017 Alejandro Ferrero. All rights reserved.
 //
-
 import Foundation
 import UIKit
 import CoreData
 
 protocol createMovieDelegate {
-    func createMovie(movie: Movie, vc: UIViewController)
+    func createMovie(movie: MovieStruct, vc: UIViewController)
 }
 
 class addMovieViewController: UIViewController {
@@ -32,14 +31,7 @@ class addMovieViewController: UIViewController {
     @IBAction func newMovieButton(_ sender: Any) {
         if delegate != nil {
             if !(movieTitleField.text?.isEmpty)! && !(movieDirectorField.text?.isEmpty)! && !(movieRatingField.text?.isEmpty)! && (!(moviePlotField.text?.isEmpty)! && moviePlotField.text != "TYPE A PLOT") && !(movieDateField.text?.isEmpty)! {
-                let movie:Movie = NSEntityDescription.insertNewObject(forEntityName: "Movie", into: CoreDataController.getContext()) as! Movie
-                movie.title = movieTitleField.text!
-                movie.director = movieDirectorField.text!
-                movie.plot = moviePlotField.text!
-                movie.date = movieDateField.text!
-                movie.rating = Float(movieRatingField.text!)!
-                movie.img = "movie"
-                CoreDataController.saveContext()
+                let movie = MovieStruct(title:movieTitleField.text!, director:movieDirectorField.text!, plot:moviePlotField.text!, date:movieDateField.text!, rating:Float(movieRatingField.text!)!, img:"")
                 delegate?.createMovie(movie: movie, vc: self)
             }
         }
