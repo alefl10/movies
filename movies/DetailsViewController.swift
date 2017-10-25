@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailsViewController: UIViewController {
     
     @IBOutlet weak var movieTitleLabel: UILabel!
     @IBOutlet weak var moviePicture: UIImageView!
@@ -36,7 +36,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         configureView()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(DetailViewController.editBtnTapped(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(DetailsViewController.editBtnTapped(_:)))
     }
     
     @objc func editBtnTapped(_ sender : UIBarButtonItem) {
@@ -49,3 +49,5 @@ class DetailViewController: UIViewController {
         }
     }
 }
+
+
