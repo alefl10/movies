@@ -14,10 +14,22 @@ class TableViewController: UITableViewController, createMovieDelegate {
     var detailsViewController: DetailsViewController? = nil
     var movies = [Movie]()
     let cdHandler = CoreDataHandler()
+    let bHandler = BundleDataHandler()
     //    let movieDB = DataBase()
     
     override func viewDidLoad() {
-        movies = cdHandler.fetchMovies()
+        if cdHandler.checkFirstLoad(){
+            cdHandler.executeFirstLoad()
+            let bundleMovies = bHandler.getBundleMovie()
+            for movie in bundleMovies {
+                cdHandler.insertMovie(movie: movie)
+            }
+            movies = cdHandler.fetchMovies()
+            print("First Load")
+        } else {
+           movies = cdHandler.fetchMovies()
+            print("CORE DATA")
+        }
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         navigationItem.leftBarButtonItem = editButtonItem
@@ -27,15 +39,12 @@ class TableViewController: UITableViewController, createMovieDelegate {
     // MARK: - createMovie Protocol
     
     func createMovie(movie: MovieStruct, vc: UIViewController) {
-        if cdHandler.insertMovie(movie: movie) {
+            cdHandler.insertMovie(movie: movie)
             movies = cdHandler.fetchMovies()
             let indexPath = IndexPath(row: 0, section: 0)
             tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
             self.navigationController?.popViewController(animated: true)
             vc.dismiss(animated: true, completion: nil)
-        } else {
-            print("There was an error inserting the movie")
-        }
         //        tableView.reloadData()
     }
     
@@ -52,13 +61,12 @@ class TableViewController: UITableViewController, createMovieDelegate {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let nextVC = segue.destination as! DetailsViewController
                 nextVC.titleString = movies[indexPath.row].title!
-                nextVC.pictureName = UIImage(named: movies[indexPath.row].img! + ".jpg")!
+                nextVC.pictureName = UIImage(named: movies[indexPath.row].img!)!
                 nextVC.directorString = movies[indexPath.row].director!
                 nextVC.plotString = movies[indexPath.row].plot!
                 nextVC.dateString = movies[indexPath.row].date!
             }
         } else if segue.identifier == "addMovie" {
-            print("addMovie")
             let addMovieVC : addMovieViewController = segue.destination as! addMovieViewController
             addMovieVC.delegate = self
         }

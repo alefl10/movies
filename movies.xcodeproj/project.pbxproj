@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A9A98B961F7CBC1300FD43D2 /* addMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A98B951F7CBC1300FD43D2 /* addMovieViewController.swift */; };
+		A9ADEABE1FA0611E00DD5EF5 /* BundleDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9ADEABD1FA0611D00DD5EF5 /* BundleDataHandler.swift */; };
 		A9B59C291F7A26B400BD816E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B59C281F7A26B400BD816E /* AppDelegate.swift */; };
 		A9B59C2E1F7A26B400BD816E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9B59C2C1F7A26B400BD816E /* Main.storyboard */; };
 		A9B59C301F7A26B400BD816E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9B59C2F1F7A26B400BD816E /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		A9A98B951F7CBC1300FD43D2 /* addMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addMovieViewController.swift; sourceTree = "<group>"; };
+		A9ADEABD1FA0611D00DD5EF5 /* BundleDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleDataHandler.swift; sourceTree = "<group>"; };
 		A9B59C251F7A26B400BD816E /* movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9B59C281F7A26B400BD816E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9B59C2D1F7A26B400BD816E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -75,9 +77,10 @@
 				A9B59C3C1F7A270E00BD816E /* DetailsViewController.swift */,
 				A9B59C3E1F7A272E00BD816E /* CellViewController.swift */,
 				A9A98B951F7CBC1300FD43D2 /* addMovieViewController.swift */,
-				A9EC73701F9F8DFC0065DD7E /* CoreDataHandler.swift */,
-				A9EC73721F9F8EE20065DD7E /* MovieStruct.swift */,
 				A9D86B971F9838620025CC3B /* CoreDataController.swift */,
+				A9EC73701F9F8DFC0065DD7E /* CoreDataHandler.swift */,
+				A9ADEABD1FA0611D00DD5EF5 /* BundleDataHandler.swift */,
+				A9EC73721F9F8EE20065DD7E /* MovieStruct.swift */,
 				A9B59C2C1F7A26B400BD816E /* Main.storyboard */,
 				A9B59C311F7A26B400BD816E /* LaunchScreen.storyboard */,
 				A9EB63691F897002005254C5 /* movieData.json */,
@@ -163,6 +166,7 @@
 			files = (
 				A9B59C291F7A26B400BD816E /* AppDelegate.swift in Sources */,
 				A9EC73731F9F8EE20065DD7E /* MovieStruct.swift in Sources */,
+				A9ADEABE1FA0611E00DD5EF5 /* BundleDataHandler.swift in Sources */,
 				A9EC73711F9F8DFC0065DD7E /* CoreDataHandler.swift in Sources */,
 				A9B59C3B1F7A26D000BD816E /* TableViewController.swift in Sources */,
 				A9A98B961F7CBC1300FD43D2 /* addMovieViewController.swift in Sources */,

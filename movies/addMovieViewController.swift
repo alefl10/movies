@@ -31,7 +31,7 @@ class addMovieViewController: UIViewController {
     @IBAction func newMovieButton(_ sender: Any) {
         if delegate != nil {
             if !(movieTitleField.text?.isEmpty)! && !(movieDirectorField.text?.isEmpty)! && !(movieRatingField.text?.isEmpty)! && (!(moviePlotField.text?.isEmpty)! && moviePlotField.text != "TYPE A PLOT") && !(movieDateField.text?.isEmpty)! {
-                let movie = MovieStruct(title:movieTitleField.text!, director:movieDirectorField.text!, plot:moviePlotField.text!, date:movieDateField.text!, rating:Float(movieRatingField.text!)!, img:"")
+                let movie = MovieStruct(title:movieTitleField.text!, director:movieDirectorField.text!, plot:moviePlotField.text!, date:movieDateField.text!, rating:Float(movieRatingField.text!)!, img:"movie")
                 delegate?.createMovie(movie: movie, vc: self)
             }
         }
