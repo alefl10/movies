@@ -16,7 +16,7 @@ struct MovieStruct {
     var plot:String = ""
     var date:String = ""
     var rating:Float = 0
-    var img = UIImage()
+    var img:String = ""
     
     init(title: String, director: String, plot: String, date: String, rating: Float, img: String) {
         self.title = title
@@ -24,17 +24,16 @@ struct MovieStruct {
         self.plot = plot
         self.date = date
         self.rating = rating
-        self.img = UIImage(named: "movie.jpg")!
-//        switch img {
-//        case "TheLionKing":
-//            self.img = UIImage(named: img + ".jpg")!
-//        case "TheSocialNetwork":
-//            self.img = UIImage(named: img + ".jpg")!
-//        case "GoodWillHunting":
-//            self.img = UIImage(named: img + ".jpg")!
-//        default:
-//            self.img = UIImage(named: "movie.jpg")!
-//        }
+        switch img {
+        case "TheLionKing":
+            self.img = img + ".jpg"
+        case "TheSocialNetwork":
+            self.img = img + ".jpg"
+        case "GoodWillHunting":
+            self.img = img + ".jpg"
+        default:
+            self.img = "movie.png"
+        }
         
     }
 }
