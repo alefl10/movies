@@ -11,7 +11,7 @@ import CoreData
 
 class TableViewController: UITableViewController, createMovieDelegate {
     
-    var detailsViewController: DetailsViewController? = nil
+    var detailsViewController: DetailViewController? = nil
     var movies = [Movie]()
     let cdHandler = CoreDataHandler()
     let bHandler = BundleDataHandler()
@@ -59,7 +59,7 @@ class TableViewController: UITableViewController, createMovieDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let nextVC = segue.destination as! DetailsViewController
+                let nextVC = segue.destination as! DetailViewController
                 nextVC.titleString = movies[indexPath.row].title!
                 nextVC.pictureName = UIImage(named: movies[indexPath.row].img!)!
                 nextVC.directorString = movies[indexPath.row].director!

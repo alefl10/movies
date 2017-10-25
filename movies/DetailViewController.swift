@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class DetailsViewController: UIViewController {
+class DetailViewController: UIViewController {
     
     @IBOutlet weak var movieTitleLabel: UILabel!
     @IBOutlet weak var moviePicture: UIImageView!
@@ -22,6 +22,7 @@ class DetailsViewController: UIViewController {
     var directorString = String()
     var plotString = String()
     var dateString = String()
+    var pressedEditBtn = true
     
     func configureView() {
         movieTitleLabel.text = titleString
@@ -35,6 +36,16 @@ class DetailsViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         configureView()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(DetailViewController.editBtnTapped(_:)))
+    }
+    
+    @objc func editBtnTapped(_ sender : UIBarButtonItem) {
+        if pressedEditBtn {
+            sender.title = "Done"
+            pressedEditBtn = false
+        } else {
+            sender.title = "Edit"
+            pressedEditBtn = true
+        }
     }
 }
-

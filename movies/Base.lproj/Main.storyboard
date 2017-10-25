@@ -189,7 +189,7 @@
         <!--Description-->
         <scene sceneID="sEt-hG-aNT">
             <objects>
-                <viewController storyboardIdentifier="DetailsViewController" title="Description" useStoryboardIdentifierAsRestorationIdentifier="YES" id="n70-og-BAG" customClass="DetailsViewController" customModule="movies" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailsViewController" title="Description" useStoryboardIdentifierAsRestorationIdentifier="YES" id="n70-og-BAG" customClass="DetailViewController" customModule="movies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dbi-mD-oCy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -255,6 +255,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MHd-pD-ddp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-780" y="755.17241379310349"/>
+        </scene>
+        <!--Edit Movie-->
+        <scene sceneID="vWd-yj-oI7">
+            <objects>
+                <viewController id="25z-AO-A6x" userLabel="Edit Movie" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xKE-cn-I4Z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="CXh-jG-eeH"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BGf-BI-pvK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="182" y="761"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gqY-ys-Htf">
