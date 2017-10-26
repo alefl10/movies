@@ -10,7 +10,9 @@ import Foundation
 import CoreData
 
 class CoreDataHandler {
-    //Making sure init() is not called on accident and creates a new instance of this class
+
+    var hasLaunched:[HasLaunched] = [HasLaunched]()
+    
     init(){}
     
     func insertMovie(movie: MovieStruct) {
@@ -55,23 +57,37 @@ class CoreDataHandler {
         let fetchRequest:NSFetchRequest<HasLaunched> = HasLaunched.fetchRequest()
         do {
             let fetchedResults = try CoreDataController.getContext().fetch(fetchRequest)
-            if fetchedResults.count != 0 {
-                for launched in fetchedResults {
-                    //CoreDataController.getContext().delete(launched)
-                    return launched.launched
-                }
+            if fetchedResults.count == 0 {
+                executeFirstLoad()
+                return true
+            } else {
+                return false
             }
-            return true
         } catch  {
             print("There was an error within \"viewDidAppear\" fetching \"hasLaunched\": \(error)")
             return false
         }
     }
     
-    func executeFirstLoad() {
+    private func executeFirstLoad() {
+        clearCD()
         print("executeFirstLoad")
         let hasLaunched = NSEntityDescription.insertNewObject(forEntityName: "HasLaunched", into: CoreDataController.getContext()) as! HasLaunched
         hasLaunched.launched = false
+    }
+    
+    private func clearCD() {
+        let fetchRequest:NSFetchRequest<HasLaunched> = HasLaunched.fetchRequest()
+        do {
+            let fetchedResults = try CoreDataController.getContext().fetch(fetchRequest)
+            if fetchedResults.count != 0 {
+                for launched in fetchedResults {
+                    CoreDataController.getContext().delete(launched)
+                }
+            }
+        } catch  {
+            print("There was an error within \"viewDidAppear\" fetching \"hasLaunched\": \(error)")
+        }
     }
     
 }

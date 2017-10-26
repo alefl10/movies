@@ -21,7 +21,6 @@ class BundleDataHandler {
         do {
             let data = try Data(contentsOf: url)
             let jsonData = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-            print(jsonData)
             let dbArr: [Any] = jsonData as! [Any]
             for movie in dbArr {
                 let movieDict = movie as! [String:Any]

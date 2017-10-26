@@ -18,7 +18,6 @@ class TableViewController: UITableViewController, createMovieDelegate, updateTab
     
     override func viewDidLoad() {
         if cdHandler.checkFirstLoad(){
-            cdHandler.executeFirstLoad()
             let bundleMovies = bHandler.getBundleMovie()
             for movie in bundleMovies {
                 cdHandler.insertMovie(movie: movie)
