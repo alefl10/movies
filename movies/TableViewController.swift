@@ -9,13 +9,12 @@ import Foundation
 import UIKit
 import CoreData
 
-class TableViewController: UITableViewController, createMovieDelegate {
+class TableViewController: UITableViewController, createMovieDelegate, updateTableDelegate {
     
     var detailsViewController: DetailsViewController? = nil
     var movies = [Movie]()
     let cdHandler = CoreDataHandler()
     let bHandler = BundleDataHandler()
-    //    let movieDB = DataBase()
     
     override func viewDidLoad() {
         if cdHandler.checkFirstLoad(){
@@ -36,7 +35,7 @@ class TableViewController: UITableViewController, createMovieDelegate {
     }
     
     
-    // MARK: - createMovie Protocol
+    // MARK: - Protocol
     
     func createMovie(movie: MovieStruct, vc: UIViewController) {
             cdHandler.insertMovie(movie: movie)
@@ -45,7 +44,10 @@ class TableViewController: UITableViewController, createMovieDelegate {
             tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
             self.navigationController?.popViewController(animated: true)
             vc.dismiss(animated: true, completion: nil)
-        //        tableView.reloadData()
+    }
+    
+    func updateTable(movie: Movie, vc: UIViewController) {
+        tableView.reloadData()
     }
     
     
@@ -59,12 +61,9 @@ class TableViewController: UITableViewController, createMovieDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let nextVC = segue.destination as! DetailsViewController
-                nextVC.titleString = movies[indexPath.row].title!
-                nextVC.pictureName = UIImage(named: movies[indexPath.row].img!)!
-                nextVC.directorString = movies[indexPath.row].director!
-                nextVC.plotString = movies[indexPath.row].plot!
-                nextVC.dateString = movies[indexPath.row].date!
+                let showDetailVC = segue.destination as! DetailsViewController
+                showDetailVC.movie = movies[indexPath.row]
+                showDetailVC.delegate = self
             }
         } else if segue.identifier == "addMovie" {
             let addMovieVC : addMovieViewController = segue.destination as! addMovieViewController

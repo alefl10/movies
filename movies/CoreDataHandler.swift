@@ -24,6 +24,16 @@ class CoreDataHandler {
         CoreDataController.saveContext()
     }
     
+    func getMovie (title: String) -> Movie? {
+        let movies = fetchMovies()
+        for movie in movies {
+            if movie.title == title {
+                return movie
+            }
+        }
+        return nil
+    }
+    
     func fetchMovies() -> [Movie] {
         var fectchedMovies = [Movie]()
         let fetchRequest:NSFetchRequest<Movie> = Movie.fetchRequest()
