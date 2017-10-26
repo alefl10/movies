@@ -35,7 +35,7 @@ class TableViewController: UITableViewController, createMovieDelegate, updateTab
     }
     
     
-    // MARK: - Protocol
+    // MARK: - Protocol Calls
     
     func createMovie(movie: MovieStruct, vc: UIViewController) {
             cdHandler.insertMovie(movie: movie)

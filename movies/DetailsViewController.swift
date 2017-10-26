@@ -63,6 +63,9 @@ class DetailsViewController: UIViewController, editMovieDelegate {
         }
     }
     
+    
+    // MARK: - Protocol Call
+    
     func editMovie(movie: Movie, vc: UIViewController) {
         movieTitleLabel.text = movie.title
         movieDirector.text = movie.director
