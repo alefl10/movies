@@ -57,7 +57,7 @@ class CoreDataHandler {
         let fetchRequest:NSFetchRequest<HasLaunched> = HasLaunched.fetchRequest()
         do {
             let fetchedResults = try CoreDataController.getContext().fetch(fetchRequest)
-            if fetchedResults.count != 0 {
+            if fetchedResults.count == 0 {
                 executeFirstLoad()
                 return true
             } else {
