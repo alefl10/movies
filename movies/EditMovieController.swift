@@ -34,7 +34,7 @@ class EditMovieController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(EditMovieController.doneBtnTapped(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(EditMovieController.doneBtnTapped(_:)))
 //        NotificationCenter.default.addObserver(self, selector: #selector(EditMovieController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(EditMovieController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
