@@ -5,12 +5,12 @@
 //  Created by Alejandro Ferrero on 9/28/17.
 //  Copyright © 2017 Alejandro Ferrero. All rights reserved.
 //
-
 import Foundation
 import UIKit
+import CoreData
 
 protocol createMovieDelegate {
-    func createMovie(movie: Movie, vc: UIViewController)
+    func createMovie(movie: MovieStruct, vc: UIViewController)
 }
 
 class addMovieViewController: UIViewController {
@@ -31,7 +31,7 @@ class addMovieViewController: UIViewController {
     @IBAction func newMovieButton(_ sender: Any) {
         if delegate != nil {
             if !(movieTitleField.text?.isEmpty)! && !(movieDirectorField.text?.isEmpty)! && !(movieRatingField.text?.isEmpty)! && (!(moviePlotField.text?.isEmpty)! && moviePlotField.text != "TYPE A PLOT") && !(movieDateField.text?.isEmpty)! {
-            let movie: Movie = Movie(title: movieTitleField.text!, director: movieDirectorField.text!, plot:moviePlotField.text!, date: movieDateField.text!, rating: movieRatingField.text! , img:"")
+                let movie = MovieStruct(title:movieTitleField.text!, director:movieDirectorField.text!, plot:moviePlotField.text!, date:movieDateField.text!, rating:Float(movieRatingField.text!)!, img:"movie")
                 delegate?.createMovie(movie: movie, vc: self)
             }
         }

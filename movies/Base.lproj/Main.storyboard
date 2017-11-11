@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -201,7 +201,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9fN-Dr-MU3">
-                                <rect key="frame" x="50" y="69.5" width="275" height="207"/>
+                                <rect key="frame" x="50" y="79.5" width="275" height="202"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Director" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="y8m-iy-OAn">
                                 <rect key="frame" x="156" y="291.5" width="64.5" height="20"/>
@@ -219,19 +219,19 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="M2f-Ji-Kfd">
                                 <rect key="frame" x="326.5" y="562" width="32.5" height="21"/>
                                 <fontDescription key="fontDescription" name="Georgia-BoldItalic" family="Georgia" pointSize="13"/>
-                                <color key="textColor" white="0.404296875" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="0.40000000000000002" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="9fN-Dr-MU3" firstAttribute="top" secondItem="l3E-rd-q22" secondAttribute="bottom" constant="15" id="0UP-bz-nr4"/>
+                            <constraint firstItem="9fN-Dr-MU3" firstAttribute="top" secondItem="l3E-rd-q22" secondAttribute="bottom" constant="25" id="0UP-bz-nr4"/>
                             <constraint firstItem="l3E-rd-q22" firstAttribute="top" secondItem="EMY-fQ-eQF" secondAttribute="top" constant="20" id="0XO-H1-HA8"/>
                             <constraint firstItem="EMY-fQ-eQF" firstAttribute="trailing" secondItem="9fN-Dr-MU3" secondAttribute="trailing" constant="50" id="3UC-hT-XaI"/>
                             <constraint firstItem="y8m-iy-OAn" firstAttribute="centerX" secondItem="dbi-mD-oCy" secondAttribute="centerX" id="3qg-sg-QK0"/>
                             <constraint firstItem="EMY-fQ-eQF" firstAttribute="trailing" secondItem="ZRx-E1-43e" secondAttribute="trailing" constant="10" id="4xi-HE-0YW"/>
                             <constraint firstItem="M2f-Ji-Kfd" firstAttribute="top" secondItem="ZRx-E1-43e" secondAttribute="bottom" constant="4" id="8DG-56-mAb"/>
-                            <constraint firstItem="y8m-iy-OAn" firstAttribute="top" secondItem="9fN-Dr-MU3" secondAttribute="bottom" constant="15" id="DbH-vx-h6R"/>
+                            <constraint firstItem="y8m-iy-OAn" firstAttribute="top" secondItem="9fN-Dr-MU3" secondAttribute="bottom" constant="10" id="DbH-vx-h6R"/>
                             <constraint firstItem="EMY-fQ-eQF" firstAttribute="bottom" secondItem="ZRx-E1-43e" secondAttribute="bottom" constant="45" id="G5M-Yz-7pL"/>
                             <constraint firstItem="EMY-fQ-eQF" firstAttribute="trailing" secondItem="l3E-rd-q22" secondAttribute="trailing" constant="15" id="Q7d-im-ztQ"/>
                             <constraint firstItem="l3E-rd-q22" firstAttribute="leading" secondItem="EMY-fQ-eQF" secondAttribute="leading" constant="15" id="RLY-yG-wYf"/>
@@ -250,11 +250,82 @@
                         <outlet property="moviePicture" destination="9fN-Dr-MU3" id="REm-Uo-SPg"/>
                         <outlet property="moviePlot" destination="ZRx-E1-43e" id="fkM-fh-TLD"/>
                         <outlet property="movieTitleLabel" destination="l3E-rd-q22" id="2rL-u8-Vkm"/>
+                        <segue destination="lLa-bk-jNs" kind="show" identifier="editMovieInfo" id="0GT-px-rzI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MHd-pD-ddp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-780" y="755.17241379310349"/>
+        </scene>
+        <!--Edit Movie Info-->
+        <scene sceneID="qZn-HR-bg0">
+            <objects>
+                <viewController storyboardIdentifier="EditMovieController" title="Edit Movie Info" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lLa-bk-jNs" customClass="EditMovieController" customModule="movies" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eXv-7f-H0D">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q0y-2c-yST">
+                                <rect key="frame" x="15" y="20" width="345" height="39"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="30"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iB7-aY-EeJ">
+                                <rect key="frame" x="50" y="84" width="275" height="192"/>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FMN-f4-cMV">
+                                <rect key="frame" x="174.5" y="286" width="26" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Georgia-Italic" family="Georgia" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XdW-yr-UHc">
+                                <rect key="frame" x="10" y="346" width="355" height="212"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu. Alejandro Ferrero Ligorred. Mircea Manuel Mangu.</string>
+                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MNc-MW-wYr">
+                                <rect key="frame" x="334" y="562" width="25" height="21"/>
+                                <color key="textColor" white="0.40000000000000002" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Georgia-BoldItalic" family="Georgia" pointSize="13"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="VCT-Ij-zVL" firstAttribute="trailing" secondItem="MNc-MW-wYr" secondAttribute="trailing" constant="16" id="2zZ-2c-gPx"/>
+                            <constraint firstItem="VCT-Ij-zVL" firstAttribute="bottom" secondItem="XdW-yr-UHc" secondAttribute="bottom" constant="45" id="4oz-fo-kPs"/>
+                            <constraint firstItem="MNc-MW-wYr" firstAttribute="top" secondItem="XdW-yr-UHc" secondAttribute="bottom" constant="4" id="9EO-pu-prw"/>
+                            <constraint firstItem="iB7-aY-EeJ" firstAttribute="top" secondItem="q0y-2c-yST" secondAttribute="bottom" constant="25" id="DPo-oA-f1X"/>
+                            <constraint firstItem="VCT-Ij-zVL" firstAttribute="trailing" secondItem="iB7-aY-EeJ" secondAttribute="trailing" constant="50" id="Ej4-wY-MdJ"/>
+                            <constraint firstItem="q0y-2c-yST" firstAttribute="top" secondItem="VCT-Ij-zVL" secondAttribute="top" constant="20" id="I5J-fn-kHD"/>
+                            <constraint firstItem="XdW-yr-UHc" firstAttribute="leading" secondItem="VCT-Ij-zVL" secondAttribute="leading" constant="10" id="Jd1-D4-Umy"/>
+                            <constraint firstItem="VCT-Ij-zVL" firstAttribute="trailing" secondItem="q0y-2c-yST" secondAttribute="trailing" constant="15" id="MMz-CS-Zto"/>
+                            <constraint firstItem="XdW-yr-UHc" firstAttribute="top" secondItem="FMN-f4-cMV" secondAttribute="bottom" constant="30" id="MrQ-pD-rqQ"/>
+                            <constraint firstItem="FMN-f4-cMV" firstAttribute="centerX" secondItem="eXv-7f-H0D" secondAttribute="centerX" id="O0z-mg-jux"/>
+                            <constraint firstItem="VCT-Ij-zVL" firstAttribute="bottom" secondItem="MNc-MW-wYr" secondAttribute="bottom" constant="20" id="QZJ-Mx-nHe"/>
+                            <constraint firstItem="FMN-f4-cMV" firstAttribute="top" secondItem="iB7-aY-EeJ" secondAttribute="bottom" constant="10" id="Rpa-aU-xgk"/>
+                            <constraint firstItem="iB7-aY-EeJ" firstAttribute="leading" secondItem="VCT-Ij-zVL" secondAttribute="leading" constant="50" id="dN3-bv-qFj"/>
+                            <constraint firstItem="FMN-f4-cMV" firstAttribute="centerY" secondItem="eXv-7f-H0D" secondAttribute="centerY" id="kS8-RV-UDh"/>
+                            <constraint firstItem="VCT-Ij-zVL" firstAttribute="trailing" secondItem="XdW-yr-UHc" secondAttribute="trailing" constant="10" id="uW1-GS-Fxw"/>
+                            <constraint firstItem="q0y-2c-yST" firstAttribute="leading" secondItem="VCT-Ij-zVL" secondAttribute="leading" constant="15" id="uc3-vI-djm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="VCT-Ij-zVL"/>
+                    </view>
+                    <connections>
+                        <outlet property="dateTxtField" destination="MNc-MW-wYr" id="8du-5y-PMW"/>
+                        <outlet property="directorTxtField" destination="FMN-f4-cMV" id="ien-N9-tMI"/>
+                        <outlet property="imgView" destination="iB7-aY-EeJ" id="syL-I0-n5j"/>
+                        <outlet property="plotTxtField" destination="XdW-yr-UHc" id="cfB-ig-tZp"/>
+                        <outlet property="titleTxtField" destination="q0y-2c-yST" id="2bF-YG-Fnr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wtH-HS-HqO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="156" y="755"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gqY-ys-Htf">

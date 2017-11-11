@@ -5,31 +5,48 @@
 //  Created by Alejandro Ferrero on 9/26/17.
 //  Copyright © 2017 Alejandro Ferrero. All rights reserved.
 //
-
 import Foundation
 import UIKit
+import CoreData
 
-class TableViewController: UITableViewController, createMovieDelegate {
-
+class TableViewController: UITableViewController, createMovieDelegate, updateTableDelegate {
+    
     var detailsViewController: DetailsViewController? = nil
-    let movieDB = DataBase()
+    var movies = [Movie]()
+    let cdHandler = CoreDataHandler()
+    let bHandler = BundleDataHandler()
     
     override func viewDidLoad() {
+        if cdHandler.checkFirstLoad(){
+            let bundleMovies = bHandler.getBundleMovie()
+            for movie in bundleMovies {
+                cdHandler.insertMovie(movie: movie)
+            }
+            movies = cdHandler.fetchMovies()
+            print("First Load")
+        } else {
+           movies = cdHandler.fetchMovies()
+            print("CORE DATA")
+        }
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         navigationItem.leftBarButtonItem = editButtonItem
     }
     
     
-    // MARK: - createMovie Protocol
+    // MARK: - Protocol Calls
     
-    func createMovie(movie: Movie, vc: UIViewController) {
-        movieDB.addMovie(movie: movie)
-        let indexPath = IndexPath(row: 0, section: 0)
-        tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-        self.navigationController?.popViewController(animated: true)
-        vc.dismiss(animated: true, completion: nil)
-
+    func createMovie(movie: MovieStruct, vc: UIViewController) {
+            cdHandler.insertMovie(movie: movie)
+            movies = cdHandler.fetchMovies()
+            let indexPath = IndexPath(row: 0, section: 0)
+            tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            self.navigationController?.popViewController(animated: true)
+            vc.dismiss(animated: true, completion: nil)
+    }
+    
+    func updateTable(movie: Movie, vc: UIViewController) {
+        tableView.reloadData()
     }
     
     
@@ -43,15 +60,11 @@ class TableViewController: UITableViewController, createMovieDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let nextVC = segue.destination as! DetailsViewController
-                nextVC.titleString = movieDB.getMovies()[indexPath.row].title
-                nextVC.pictureName = movieDB.getMovies()[indexPath.row].img
-                nextVC.directorString = movieDB.getMovies()[indexPath.row].director
-                nextVC.plotString = movieDB.getMovies()[indexPath.row].plot
-                nextVC.dateString = movieDB.getMovies()[indexPath.row].date
+                let showDetailVC = segue.destination as! DetailsViewController
+                showDetailVC.movie = movies[indexPath.row]
+                showDetailVC.delegate = self
             }
         } else if segue.identifier == "addMovie" {
-            print("addMovie")
             let addMovieVC : addMovieViewController = segue.destination as! addMovieViewController
             addMovieVC.delegate = self
         }
@@ -70,17 +83,14 @@ class TableViewController: UITableViewController, createMovieDelegate {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movieDB.getMovies().count
+        return movies.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CellViewController
-        for movie in movieDB.getMovies() {
-            print(movie.title)
-        }
-        let movie = movieDB.getMovies()[indexPath.row]
+        let movie = movies[indexPath.row]
         cell.movieTitle.text = movie.title
-        cell.movieRating.text = movie.rating
+        cell.movieRating.text = String(movie.rating)
         return cell
     }
     
@@ -91,7 +101,9 @@ class TableViewController: UITableViewController, createMovieDelegate {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            movieDB.removeMovie(index: indexPath.row)
+            CoreDataController.getContext().delete(movies[indexPath.row])
+            movies.remove(at: indexPath.row)
+            CoreDataController.saveContext()
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
