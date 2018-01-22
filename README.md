@@ -13,16 +13,9 @@ In terms of data storing it uses two different sources for fast querying and une
 1. When started for the first time, the app retrieves the contents included in the **movieData.json** via `bundle`.
 2. Anything that shall be edited, added, or deleted from this point on is handled and stored through core data to provide a faster and more secure data storing performance.
 
-
-- **MongoDB** was the selected non-relational data base used to store the data
-  - **Data Modeling** and **Querying** was achieved through the use of `mongoose` which helped to design the desired schema on top of mongo
-
-- **JSON Web Token** or JWT was the selected third-party framework used to authenticate requests
-  - This allowed to secure all the sensitive routes and provide an extra layer of security
-
 ## Deployment
 
-It is assumed you have already installed the following on your computer:
+For the Swift Application to work properly, it is assumed you have already installed the following on your Macintosh machine:
 
 - XCode 9.2 or superior
 - Swift 3
